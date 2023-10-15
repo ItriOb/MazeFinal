@@ -3,17 +3,17 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Stack;
 
-public class Maze {
-    private int size;
+public class Labyrinthe {
+    private int size;//taille du labyrinthe
     private int row;
     private int column;
-    private Cell[][] cells;
-    private Cell ongoing;
-    private Stack<Cell> cellsStack ;
-    private Cell entry;
-    private Cell exit;
+    private Cell[][] cells;// tableau de deux dimensions qui stock les carres du labyrinthe
+    private Cell ongoing;//le carre courant du chemin
+    private Stack<Cell> cellsStack ;// pile qui stock le chemin du labyrinthe
+    private Cell entry;//entree du labyrinthe
+    private Cell exit;//sortie du labyrinthe
 
-    public Maze(int size) {
+    public Labyrinthe(int size) {
         this.size = size;
         this.row = size;
         this.column = size;
@@ -51,6 +51,8 @@ public class Maze {
 
     }
 
+
+    //supprimer le mur en commun entre deux carres
     private void removeWall(Cell ongoing,Cell next){
         int x = ongoing.getRow()-next.getRow();
         int y = ongoing.getColumn()-next.getColumn();
@@ -73,6 +75,8 @@ public class Maze {
         }
     }
 
+
+    //methode qui cree le chemin du labyrinthe
     private void createPath(Cell ongoing){
         do{
             if(ongoing.noCheckedNeighbors()){
@@ -88,6 +92,8 @@ public class Maze {
             }
         }while(!this.cellsStack.isEmpty());
     }
+
+
 
     private void addNeighbors(Cell ongoing){
         int x = ongoing.getRow();

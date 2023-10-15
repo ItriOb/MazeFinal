@@ -6,9 +6,9 @@ public class Cell {
     private int y;
     private int row;
     private int column;
-    private  int volume;// size of the cell when we want to print it
-    private boolean checked=false;
-    private boolean[] walls={true,true,true,true};
+    private  int volume;//
+    private boolean checked=false;// etat de le carre; visite ou non
+    private boolean[] walls={true,true,true,true}; //murs qui entourent le carre
     ArrayList<Cell> neighbors =new ArrayList<>();
 
     public Cell(int row, int column) {
@@ -20,6 +20,7 @@ public class Cell {
         this.column = column;
     }
 
+    //retourne un voisin aleatoire du carre
     public Cell getRandomNeighbor(){
         Random random = new Random();
         Cell neighbor =neighbors.get(random.nextInt((neighbors.size()-1)+1));
@@ -35,6 +36,7 @@ public class Cell {
     }
 
 
+    //verifie si le carre a des voisins non-visite
     public boolean noCheckedNeighbors(){
         for(Cell neighbor:neighbors){
             if(!neighbor.checked){
